@@ -187,7 +187,6 @@ class GitRepository extends SingleExternalRepository
                 $arRaw = str::replace($arRaw[0],'https://','');
                 $arCredentials = str::split($arRaw,':');
                 if (count($arCredentials) === 2){
-                    var_dump($arCredentials);
                     $git->setCredentials($arCredentials[0],$arCredentials[1]);
                 }
             }
