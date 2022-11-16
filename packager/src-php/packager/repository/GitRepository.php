@@ -180,6 +180,19 @@ class GitRepository extends SingleExternalRepository
             Console::debug("Git.Clone '{0}' to '{1}'", $this->getNormalSource(), $dir);
         }
 
+        if (str::pos($this->getNormalSource(), ':')>=0){
+            $arRaw = str::split($this->getNormalSource(),'@');
+            if (count($arRaw) === 2)
+            {
+                $arRaw = str::replace($arRaw[0],'https://','');
+                $arCredentials = str::split($arRaw,':');
+                if (count($arCredentials) === 2){
+                    var_dump($arCredentials);
+                    $git->setCredentials($arCredentials[0],$arCredentials[1]);
+                }
+            }
+        }
+
         $git->clean(['force' => true, 'cleanDirectories' => true]);
 
         try {
